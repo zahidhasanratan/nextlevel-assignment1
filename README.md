@@ -35,9 +35,51 @@ This saves a lot of time debugging.
 
 ---
 
-Also, when a project grows bigger, and we have lots of files and functions, TypeScript helps us with **auto-completion** and **refactoring**.  
-I noticed how easy it became to understand what each function is expecting and returning just by hovering over them.  
-It’s like having **documentation built into the code!**
+
+## 2.What is the use of the `keyof` keyword in TypeScript?
+
+The `keyof` keyword in TypeScript is used to get the **keys of an object type** as a union of string literal types.  
+It helps us make our code more type-safe, especially when we are working with object properties dynamically.
+
+The `keyof` keyword helps us build more flexible and reusable functions while still keeping everything type-safe.  
+It’s especially useful when working with object properties dynamically, like in form handling, API responses, or utility functions.
+---
+
+### 🔍 Example:
+
+```ts
+type User = {
+  id: number;
+  name: string;
+  email: string;
+};
+
+type UserKeys = keyof User;
+// UserKeys is now: "id" | "name" | "email"
+```
+
+Now, we can use `UserKeys` in a function to safely access values from a `User` object:
+
+```ts
+function getValue(obj: User, key: keyof User) {
+  return obj[key];
+}
+
+const user = { id: 1, name: "Alice", email: "alice@example.com" };
+
+console.log(getValue(user, "email")); // Output: "alice@example.com"
+```
+
+If we try to use a key that doesn’t exist, TypeScript will show an error:
+
+```ts
+// Error: Argument of type '"age"' is not assignable to parameter of type 'keyof User'
+// getValue(user, "age");
+```
+
+---
+
+
 
 Another great thing is when we make changes—like **renaming a property** or **refactoring a function**—TypeScript shows where it’s used and if it will break anything.  
 This makes big projects **way easier to maintain**.
