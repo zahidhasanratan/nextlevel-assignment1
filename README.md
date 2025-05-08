@@ -43,6 +43,7 @@ It helps us make our code more type-safe, especially when we are working with ob
 
 The `keyof` keyword helps us build more flexible and reusable functions while still keeping everything type-safe.  
 It’s especially useful when working with object properties dynamically, like in form handling, API responses, or utility functions.
+
 ---
 
 ### 🔍 Example:
